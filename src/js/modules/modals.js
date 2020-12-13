@@ -106,7 +106,7 @@ const modals = () => {
             }, time);
         }
 
-        showModalByTime('.popup-consultation', 5000);
+        //showModalByTime('.popup-consultation', 5000);
 
         function showModalByScroll(selector) {
             window.addEventListener('scroll', () => {

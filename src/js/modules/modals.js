@@ -6,7 +6,7 @@ function closeModal(modalSelector) {
     modal.classList.add('hide');
     document.body.style.overflow = '';
     document.body.style.marginRight = '0px';
-    gift.style.right = `2rem`;
+    gift.style.right = '2rem';
 }
 
 const modals = () => {
@@ -48,7 +48,7 @@ const modals = () => {
                 btnPressed = true;
 
                 if(destroy) {
-                    item.remove();
+                    item.classList.add('hide');
                 }
 
                 closeAllModals();
@@ -106,7 +106,7 @@ const modals = () => {
             }, time);
         }
 
-        showModalByTime('.popup-consultation', 5000);
+        //showModalByTime('.popup-consultation', 5000);
 
         function showModalByScroll(selector) {
             window.addEventListener('scroll', () => {

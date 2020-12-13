@@ -12,8 +12,10 @@ const mask = (selector) => {
             range.moveEnd('character', pos);
             range.moveStart('character', pos);
             range.select();
-
         }
+        elem.addEventListener('click', () => {
+            elem.setSelectionRange(pos, pos);
+        });
     };
     
     function createMask(event) {
@@ -45,10 +47,6 @@ const mask = (selector) => {
         item.addEventListener('input', createMask);
         item.addEventListener('focus', createMask);
         item.addEventListener('blur', createMask);
-        item.addEventListener('click', () => {
-            item.setSelectionRange(3, 3);
-        });
-        
     });
 };
 

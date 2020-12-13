@@ -4508,6 +4508,10 @@ var mask = function mask(selector) {
       range.moveStart('character', pos);
       range.select();
     }
+
+    elem.addEventListener('click', function () {
+      elem.setSelectionRange(pos, pos);
+    });
   };
 
   function createMask(event) {
@@ -4538,9 +4542,6 @@ var mask = function mask(selector) {
     item.addEventListener('input', createMask);
     item.addEventListener('focus', createMask);
     item.addEventListener('blur', createMask);
-    item.addEventListener('click', function () {
-      item.setSelectionRange(3, 3);
-    });
   });
 };
 

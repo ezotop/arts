@@ -1,6 +1,6 @@
 import {postData} from "../services/requests";
 
-const forms = () => {
+const forms = (state) => {
     const form = document.querySelectorAll('form'),
           inputs = document.querySelectorAll('input'),
           upload = document.querySelectorAll('[name="upload"]');
@@ -31,7 +31,7 @@ const forms = () => {
 
     upload.forEach(item => {
         item.addEventListener('input', () => {
-            console.log(item.files[0]);
+            //console.log(item.files[0]);
             let dots;
             const arr = item.files[0].name.split('.');
             // 'qwertyasd.jpg' => ['qwertyasd', 'jpg']
@@ -64,10 +64,18 @@ const forms = () => {
             textMessage.textContent = message.loading;
             statusMessage.append(textMessage);
 
-            const formData = new FormData(item);
             let api;
-            item.closest('.popup-design') || item.classList.contains('calc_form') ? api = path.designer : api = path.question;
+            (item.closest('.popup-design') || item.classList.contains('calc_form')) ? api = path.designer : api = path.question;
             console.log(api);
+
+            const formData = new FormData(item);
+
+            if (item.classList.contains('calc_form')) {
+                for (let key in state) {
+                    formData.append(key, state[key]);
+                }
+            }
+            console.log(JSON.stringify(Object.fromEntries(formData.entries())));
 
             postData(api, formData)
                 .then(res => {
@@ -81,24 +89,13 @@ const forms = () => {
                 })
                 .finally(() => {
                     clearInputs();
-                    // resetCheckbox('.checkbox');
-                    // for (let key in state) {
-                    //     delete state[key];
-                    // }
                     setTimeout(() => {
                         statusMessage.remove();
                         item.style.display = 'block';
                         item.classList.remove('fadeOutUp');
                         item.classList.add('fadeInUp');
                     }, 3000);
-                    // windowForm.forEach((item, i) => {
-                    //     if (item.classList.contains('do_image_more')) {
-                    //         state.form = i;
-                    //     }
-                    // });
-                    // windowType.forEach(item => {
-                    //     state.type = item.value;
-                    // });
+                    
                 });
         });
     });

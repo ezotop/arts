@@ -11,17 +11,17 @@ const filter = () => {
 
         const typeFilter = (markType) => {
             markAll.forEach(item => {
-                item.classList.remove('animated', 'fadeIn', 'show');
-                item.classList.add('hide');
+                item.classList.remove('show');
+                item.classList.add('hide', 'animated', 'fadeIn');
             });
 
-            no.classList.remove('animated', 'fadeIn', 'show');
+            no.classList.remove('show');
             no.classList.add('hide');
 
             if (markType.length > 0) {
                 markType.forEach(item => {
                     item.classList.remove('hide');
-                    item.classList.add('animated', 'fadeIn', 'show');
+                    item.classList.add('show');
                 });
             } else {
                 no.classList.remove('hide');

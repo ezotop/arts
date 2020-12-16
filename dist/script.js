@@ -4957,6 +4957,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _modules_calc__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./modules/calc */ "./src/js/modules/calc.js");
 /* harmony import */ var _modules_filter__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./modules/filter */ "./src/js/modules/filter.js");
 /* harmony import */ var _modules_pictureSize__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./modules/pictureSize */ "./src/js/modules/pictureSize.js");
+/* harmony import */ var _modules_accordion__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./modules/accordion */ "./src/js/modules/accordion.js");
+
 
 
 
@@ -4981,7 +4983,95 @@ window.addEventListener('DOMContentLoaded', function () {
   Object(_modules_forms__WEBPACK_IMPORTED_MODULE_2__["default"])(calcState);
   Object(_modules_filter__WEBPACK_IMPORTED_MODULE_7__["default"])();
   Object(_modules_pictureSize__WEBPACK_IMPORTED_MODULE_8__["default"])('.sizes-block');
+  Object(_modules_accordion__WEBPACK_IMPORTED_MODULE_9__["default"])('.accordion-heading', '.accordion-block');
 });
+
+/***/ }),
+
+/***/ "./src/js/modules/accordion.js":
+/*!*************************************!*\
+  !*** ./src/js/modules/accordion.js ***!
+  \*************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var core_js_modules_web_dom_collections_for_each__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! core-js/modules/web.dom-collections.for-each */ "./node_modules/core-js/modules/web.dom-collections.for-each.js");
+/* harmony import */ var core_js_modules_web_dom_collections_for_each__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_web_dom_collections_for_each__WEBPACK_IMPORTED_MODULE_0__);
+
+
+var accordion = function accordion(triggersSelector, itemsSelector) {
+  var btns = document.querySelectorAll(triggersSelector),
+      blocks = document.querySelectorAll(itemsSelector); // Вариант 1
+  // function hideItems() {
+  //     btns.forEach(btn => {
+  //         btn.classList.remove('active-style');
+  //     });
+  //     blocks.forEach(item => {
+  //         item.classList.remove('show');
+  //         item.classList.add('animated', 'fadeInUp', 'hide');
+  //     });
+  // }
+  // hideItems();
+  // btns.forEach((btn, i) => {
+  //     btn.addEventListener('click', () => {
+  //         // hideItems();
+  //         btn.classList.toggle('active-style');
+  //         if (btn.classList.contains('active-style')) {
+  //             blocks[i].classList.remove('hide');
+  //             blocks[i].classList.add('show');
+  //         } else {
+  //             blocks[i].classList.remove('show');
+  //             blocks[i].classList.add('hide');
+  //         }
+  //     });
+  // });
+  // Вариант 2
+  // blocks.forEach(block => {
+  //     block.classList.add('animated', 'fadeInDown');
+  // });
+  // btns.forEach(btn => {
+  //     btn.addEventListener('click', function() {
+  //         if (!this.classList.contains('active')) {
+  //             btns.forEach(btn => {
+  //                 btn.classList.remove('active', 'active-style');
+  //             });
+  //             this.classList.add('active', 'active-style');
+  //         }
+  //     });
+  // });
+  // Вариант 3
+
+  btns.forEach(function (btn, i) {
+    btn.addEventListener('click', function () {
+      // this.classList.toggle('active-style');
+      // this.nextElementSibling.classList.toggle('active-content');
+      // if (this.classList.contains('active-style')) {
+      //     this.nextElementSibling.style.maxHeight = this.nextElementSibling.scrollHeight + 80 + 'px'; //Высота контента внутри элемента + 80px на padding
+      // } else {
+      //     this.nextElementSibling.style.maxHeight = '0px';
+      // }
+      // Одновременно блоки не могут быть открыты:
+      if (!this.classList.contains('active-style')) {
+        btns.forEach(function (item) {
+          item.classList.remove('active-style');
+          item.nextElementSibling.classList.remove('active-content');
+          item.nextElementSibling.style.maxHeight = '0px';
+        });
+        this.classList.add('active-style');
+        this.nextElementSibling.classList.add('active-content');
+        this.nextElementSibling.style.maxHeight = this.nextElementSibling.scrollHeight + 80 + 'px';
+      } else {
+        this.classList.toggle('active-style');
+        this.nextElementSibling.classList.remove('active-content');
+        this.nextElementSibling.style.maxHeight = '0px';
+      }
+    });
+  });
+};
+
+/* harmony default export */ __webpack_exports__["default"] = (accordion);
 
 /***/ }),
 

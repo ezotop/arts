@@ -70,12 +70,12 @@ const forms = (state) => {
 
             const formData = new FormData(item);
 
-            if (item.classList.contains('calc_form')) {
-                for (let key in state) {
-                    formData.append(key, state[key]);
-                }
-            }
-            console.log(JSON.stringify(Object.fromEntries(formData.entries())));
+            // if (item.classList.contains('calc_form')) {
+            //     for (let key in state) {
+            //         formData.append(key, state[key]);
+            //     }
+            // }
+            // console.log(JSON.stringify(Object.fromEntries(formData.entries())));
 
             postData(api, formData)
                 .then(res => {
